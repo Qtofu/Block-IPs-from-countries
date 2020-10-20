@@ -36,8 +36,8 @@ for i in $(cat /tmp/$GEOIP.zone ); do ipset -A $GEOIP $i; done
 rm -f /tmp/$GEOIP.zone
 echo -e "${Green}规则添加成功，即将开始封禁ip！${Font}"
 #开始封禁
-iptables -I OUTPUT -p tcp -m set --match-set "$GEOIP" src -j DROP
-iptables -I OUTPUT -p udp -m set --match-set "$GEOIP" src -j DROP
+iptables -A OUTPUT -p tcp -m set --match-set "$GEOIP" src -j DROP
+iptables -A OUTPUT -p udp -m set --match-set "$GEOIP" src -j DROP
 echo -e "${Green}所指定国家($GEOIP)的ip封禁成功！${Font}"
 }
 
